@@ -262,3 +262,72 @@ Press OK when the following popup appears -> the Client VM will automatically re
 
 <br>
 
+## Step 5: Setting up Remote Connection for Domain Users
+
+If not already, log into the Domain Controller <b>Server Manager</b> -> <b>Tools</b> -> <b>Active Directory Users and Computers</b> <br>
+Under the Domain container, click the <b>Computers</b> OU. You should see the Client VM listed.
+
+<img src="https://i.imgur.com/TT1JXxR.png" height="80%" width="80%" alt="9"/><br />
+
+If not already, log into the Client VM using the admin user -> <b>System Settings</b> -> <b>Remote Desktop</b> -> <b>Select users that can remotely access this PC</b> -> Add
+
+<img src="https://i.imgur.com/oKxoprK.png" height="80%" width="80%" alt="9"/><br />
+
+In the <b>Enter the object names to select:</b> field, type <b>Domain Users</b> -> <b>Check Names</b> -> <b>OK</b>
+
+<img src="https://i.imgur.com/JXijlI7.png" height="60%" width="60%" alt="9"/><br />
+
+<br>
+
+## Step 6: Creating Domain Users via a PowerShell Script
+
+Back in the Domain Controller, search for / right click <b>Windows PowerShell ISE</b> select <b>Run as administrator</b>
+<img src="https://i.imgur.com/I3165Lu.png" height="85%" width="85%" alt="9"/><br />
+
+<b>File</b> -> <b>New</b>
+
+<img src="https://i.imgur.com/Y5BAh4S.png" height="80%" width="80%" alt="9"/><br />
+
+Navigate to the following site and copy / paste the script into the blank powershell editor currently open on the DC. 
+
+https://github.com/joshmadakor1/AD_PS/blob/master/Generate-Names-Create-Users.ps1
+
+<b>Save</b> as 1_CREATE_USERS.ps1 to the Desktop -> <b>File</b> -> <b>Open</b> -> navigate to the Desktop -> select <b>1_CREATE_USERS.ps1</b> -> <b>Open</b>
+
+<img src="https://i.imgur.com/m6N6m4j.png" height="80%" width="80%" alt="9"/><br />
+
+In the command line, run <b>Set-ExecutionPolicy Unrestricted</b> 
+
+<img src="https://i.imgur.com/xCzIjyZ.png" height="65%" width="65%" alt="9"/><br />
+
+Change directory (cd) to where the script was saved.
+
+```commandline
+cd C:\Users\tsmith\Desktop\1_CREATE_USERS.ps1
+```
+
+Click the green run button to run the script which will start the creation of domain users. <br>
+<b>Note</b>: The Password for these users will be <b>Password1</b> <br>
+
+If the following popup appears, click Run once. <br>
+
+<img src="https://i.imgur.com/IN8xvda.png" height="65%" width="65%" alt="9"/><br />
+<img src="https://i.imgur.com/RMyC0Co.png" height="80%" width="80%" alt="9"/><br />
+
+To view the newly created users, navigate to:  <b>Server Manager</b> -> <b>Tools</b> -> <b>Active Directory Users and Computers</b> <br>
+They will be listed in the <b>_USERS</b> OU
+
+<img src="https://i.imgur.com/f2xPlao.png" height="80%" width="80%" alt="9"/><br />
+
+The names were randomly generated and you can choose anyone to login to the Client VM. <br>
+Use the auto-generated username and password (<b>Password1</b>).
+
+<img src="https://i.imgur.com/LoWC3Er.png" height="50%" width="50%" alt="9"/><br />
+
+<br>
+
+## Conclusion</h2>
+
+Active Directory isn't just another directory service – it's the guardian of your network's kingdom. It lets you control traffic flow, lock down unauthorized access, and keep sensitive data under wraps. Mastering Active Directory is a must-have skill for any IT pro, no matter your area.
+
+Ready to transform your network into a security fortress? Dive in and discover the power of Active Directory!
