@@ -166,10 +166,99 @@ Create a <b>Directory Services Restory Mode (DSRM) password</b> (required but no
 <br>
 The NETBIOS domain will be created (will take some time) -> Next -> till you reach <b>Prerequisites Check</b> (will take some time) -> <b>Install</b> <br>
 <br>
-Once the installion is completd, the VM will reboot -> once rebooted, login to the Domain Controller using the domain name and the username. 
-<b>Note</b> See example below. <br>
+Once the installion is completd, the VM will reboot -> login to the Domain Controller using the domain name <b>and</b> the username. <br>
+<br> 
+<b>Note</b>: You must use the domain name with the username - ex. mydomain.com\username <br>
+See example below. <br>
+<br>
+<img src="https://i.imgur.com/nT5uFiT.png" height="55%" width="55%" alt="9"/><br>
 
-<img src="https://i.imgur.com/nT5uFiT.png" height="55%" width="55%" alt="9"/><br />
+<br>
+
+## Step 3: Creating a Domain Admin
+
+A Domain Admin account grants complete control over a Domain Controller, allowing creation, modification, or deletion of any user account or object within the domain.
+
+Now that we're logged into the DC, open <b>Server Manager</b> -> click Tools (top-right corner) -> click on <b>Active Directory Users and Computers</b>
+
+<img src="https://i.imgur.com/grdGvPg.png" height="70%" width="70%" alt="9"/><br />
+
+Right click on the <b>Domain container</b> -> New -> <b>Organizational Unit</b>
+
+<img src="https://i.imgur.com/9DGmBMS.png" height="80%" width="80%" alt="9"/><br />
+
+Name the OU "_ADMINS" -> OK 
+
+Right click <b>_ADMINS</b> -> New -> <b>User</b>
+
+<img src="https://i.imgur.com/gUev6rr.png" height="80%" width="80%" alt="9"/><br />
+
+Create the user and be sure to take note of the credentials -> uncheck the <b>User must change password at next logon</b> box (optional) -> Finish
+
+<img src="https://i.imgur.com/fmMKhNj.png" height="50%" width="50%" alt="9"/><br />
+<img src="https://i.imgur.com/S0c7T05.png" height="50%" width="50%" alt="9"/><br />
+
+To make this user a Domain Admin, we nee to add this user to the <b>Domain Admins</b> security group: <br>
+Right click on the user created above -> <b>Properties</b> -> <b>Member of</b> tab -> <b>Add</b> 
+
+<img src="https://i.imgur.com/3MooGCr.png" height="50%" width="50%" alt="9"/><br />
+
+In the <b>Enter the object names to select:</b> field, type <b>domain</b> -> <b>Check Names</b> 
+
+<img src="https://i.imgur.com/WnHnpsK.png" height="60%" width="60%" alt="9"/><br />
+
+Select <b>Domain Admins</b> -> OK -> <b>Apply</b> <br>
+The user should now have been successfully added to the <b>Domain Admins</b> security group <br>
+Click OK.
+
+<img src="https://i.imgur.com/eHOKSWT.png" height="80%" width="80%" alt="9"/><br />
+
+Finally, logout of the Domain controller and log back in with the User we just created.
+
+<img src="https://i.imgur.com/oECi1Rd.png" height="50%" width="50%" alt="9"/><br>
+
+<br>
+
+## Step 4: Update Client VM DNS Settings to the DC Private IP Address and adding it to the Domain
+
+### Update Client VM DNS Settings
+
+Navigate back to the Client VM -> <b>Networking</b> -> <b>Network Interface</b>
+
+<img src="https://i.imgur.com/0jFQlMM.png" height="60%" width="60%" alt="9"/><br />
+
+Click <b>DNS Servers</b> and create a <b>Custom DNS server</b> using the Domain Controller's Private IP address -> Save
+
+<img src="https://i.imgur.com/DK1mOBp.png" height="60%" width="60%" alt="9"/><br />
+
+Go back to the Client <b>Overview</b> settings -> <b>Restart</b> 
+
+<img src="https://i.imgur.com/Cq7d1PZ.png" height="80%" width="80%" alt="9"/><br />
+
+Once restarted, login to the Client VM again as the Domain admin account using the Remote Desktop.
+
+<img src="https://i.imgur.com/LkqUK6Q.png" height="50%" width="50%" alt="9"/><br />
+
+<br>
+
+### Adding Client VM to the domain
+
+Upon login, navigate to <b>Settings</b> -> <b>System</b> -> <b>About</b> -> <b>Rename this PC (advanced)</b>
+
+<img src="https://i.imgur.com/1tu4Kwj.png" height="80%" width="80%" alt="9"/><br />
+
+Click <b>Change</b>
+
+<img src="https://i.imgur.com/zKDbFIs.png" height="50%" width="50%" alt="9"/><br />
+
+Tick the <b>Domain</b> radio button under <b>Member of</b> -> type in the domain name <br>
+In the <b>Computer Name/Domain Changes</b> popup, enter the <b>Domain admin</b> credentials -> Ok <br>
+
+<img src="https://i.imgur.com/nT3wd3q.png" height="80%" width="80%" alt="9"/><br />
+
+Press OK when the following popup appears -> the Client VM will automatically restart soon after
+
+<img src="https://i.imgur.com/oVmTUG5.png" height="40%" width="40%" alt="9"/><br />
 
 <br>
 
