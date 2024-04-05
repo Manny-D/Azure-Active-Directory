@@ -34,14 +34,6 @@ Additionally, a PowerShell script will generate 1,000 user accounts, showcasing 
 
 <br>
 
-## Project Diagram
-
-<p align="center">
-<img src="https://i.imgur.com/BcRNcBi.png" height="50%" width="50%" alt="9"/><br />
-</p>
-
-<br>
-
 ## Step 1: Setup
 
 When in Azure, create a <b>Resource Group</b>, then create 2 Virtual Machines (VMs). <br>
