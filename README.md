@@ -7,9 +7,9 @@
 <br>
 
 ## Description 
-In this project, I will setup a simulated Active Directory environment where I will create the following:
+In this project, I will setup a simulated Active Directory environment in Azure where I will create the following:
 
-- A Domain Controller (DC) VM with a static IP to manage user credentials (Active Directory).
+- A Domain Controller (DC) VM with a static IP to manage user credentials.
 - A Client VM that joins the domain and uses the DC for DNS.
 
 The DC will act as a central point for monitoring network traffic. Clients will route their internet traffic through the DC, allowing administrators to identify suspicious activity in logs.
