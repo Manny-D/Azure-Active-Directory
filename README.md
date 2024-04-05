@@ -1,4 +1,4 @@
-# Creating an Azure Active Directory 
+# Azure Active Directory 
 
 <p align="center">
 <img src="https://github.com/Manny-D/Azure-Active-Directory/assets/99146530/02ccd842-ae28-4192-88f6-fc81884550a9"/>
